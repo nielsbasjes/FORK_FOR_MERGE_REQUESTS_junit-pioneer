@@ -19,6 +19,7 @@ import java.util.TimeZone;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+@Deprecated(forRemoval = true, since = "3.0")
 public class DefaultLocaleTimezoneExtensionDemo {
 
 	// tag::default_locale_language[]

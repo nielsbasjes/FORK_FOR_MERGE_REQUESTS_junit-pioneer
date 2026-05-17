@@ -21,7 +21,6 @@ import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.platform.commons.support.ReflectionSupport;
 import org.junitpioneer.internal.PioneerAnnotationUtils;
-import org.junitpioneer.jupiter.TimeZoneProvider.NullTimeZoneProvider;
 
 /*
  * @deprecated The extension was provided to the JUnit framework.
@@ -43,7 +42,7 @@ class DefaultTimeZoneExtension implements BeforeEachCallback, AfterEachCallback 
 	private void setDefaultTimeZone(Store store, DefaultTimeZone annotation) {
 		validateCorrectConfiguration(annotation);
 		TimeZone defaultTimeZone;
-		if (annotation.timeZoneProvider() != NullTimeZoneProvider.class)
+		if (annotation.timeZoneProvider() != TimeZoneProvider.NullTimeZoneProvider.class)
 			defaultTimeZone = createTimeZone(annotation.timeZoneProvider());
 		else
 			defaultTimeZone = createTimeZone(annotation.value());
@@ -56,7 +55,7 @@ class DefaultTimeZoneExtension implements BeforeEachCallback, AfterEachCallback 
 
 	private static void validateCorrectConfiguration(DefaultTimeZone annotation) {
 		boolean noValue = annotation.value().isEmpty();
-		boolean noProvider = annotation.timeZoneProvider() == NullTimeZoneProvider.class;
+		boolean noProvider = annotation.timeZoneProvider() == TimeZoneProvider.NullTimeZoneProvider.class;
 		if (noValue == noProvider)
 			throw new ExtensionConfigurationException(
 				"Either a valid time zone id or a TimeZoneProvider must be provided to "
